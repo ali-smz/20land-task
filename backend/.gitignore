@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Django cache and local stuff
+*.sqlite3
+db.sqlite3-journal
+*.log
+
+# Django generated files
+static/
+media/
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# PyTest / Coverage
+.coverage
+htmlcov/
+*.cover
+*.coverage
+*.coverage.*
+.cache
+pytest_cache/
+
+# Migrations (if you want to keep clean repo and generate later)
+# Uncomment line below ONLY if your migrations are generated on server
+# */migrations/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pip installer metadata
+pip-wheel-metadata/
+pip-selfcheck.json
+
+# Byte-compiled / optimized / DLL files
+.eggs/
+*.egg-info/
