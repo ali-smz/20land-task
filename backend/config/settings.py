@@ -44,16 +44,18 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "landing.middleware.RequestLogMiddleware",
     "landing.middleware_rate.RateLimitMiddleware",
 ]
@@ -139,3 +141,5 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
 
 MONGO_URI = "mongodb://localhost:27017/"
 MONGO_DB = "landing_logs"
+
+

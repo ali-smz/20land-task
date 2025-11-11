@@ -8,15 +8,11 @@ from pymongo import MongoClient
 def save_mobile(mobile, ip, agent):
     MobileRecord.objects.create(
         mobile=mobile,
-        ip=ip,
-        user_agent=agent,
-        created_at=timezone.now()
     )
 
     client = MongoClient(settings.MONGO_URI)
     db = client[settings.MONGO_DB]
     db.logs.insert_one({
-        "mobile": mobile,
         "ip": ip,
         "user_agent": agent,
         "timestamp": timezone.now()
