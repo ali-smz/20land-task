@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-crnsv&yy3gdq=t%r8!#t4ag22uy(c&!00wfnj4)roex^%0ue6z'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-crnsv&yy3gdq=t%r8!#t4ag22uy(c&!00wfnj4)roex^%0ue6z')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -44,8 +45,7 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True') == 'True'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "AliS2004",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": os.environ.get('POSTGRES_DB', 'postgres'),
+        "USER": os.environ.get('POSTGRES_USER', 'postgres'),
+        "PASSWORD": os.environ.get('POSTGRES_PASSWORD', 'postgres'),
+        "HOST": os.environ.get('POSTGRES_HOST', 'db'),
+        "PORT": int(os.environ.get('POSTGRES_PORT', '5432')),
     }
 }
 
@@ -136,10 +136,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://redis:6379/1')
 
-MONGO_URI = "mongodb://localhost:27017/"
-MONGO_DB = "landing_logs"
+MONGO_URI = os.environ.get('MONGO_URI', 'mongodb://mongo:27017/')
+MONGO_DB = os.environ.get('MONGO_DB', 'landing_logs')
 
 
